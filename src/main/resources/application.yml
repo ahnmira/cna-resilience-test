@@ -1,0 +1,17 @@
+resilience4j.circuitbreaker:
+  configs:
+    default:
+      failureRateThreshold: 50
+      slowCallRateThreshold: 100
+      slowCallDurationThreshold: 60000
+      permittedNumberOfCallsInHalfOpenState: 4
+      maxWaitDurationInHalfOpenState: 1000
+      slidingWindowType: COUNT_BASED
+      slidingWindowSize: 4
+      minimumNumberOfCalls: 10
+      waitDurationInOpenState: 10000
+  instances:
+    hello:
+      baseConfig: default
+      slidingWindowSize: 4
+      failureRateThreshold: 50 # 50%까지가 실폐률 한계선. 즉 slidingWindowSize가 4 이므로 2번 에러나면 OPEN 상태로 바꿈
